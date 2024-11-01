@@ -1,0 +1,53 @@
+﻿@model DSCC.CW1.Frontend._14714.Models.Member
+
+@{
+    ViewBag.Title = "Edit Member";
+}
+
+<h2 class="text-center">Edit Member</h2>
+
+<div class="container mt-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-warning text-white">
+            <h3 class="mb-0">Update Member Information</h3>
+        </div>
+        <div class="card-body p-4">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.MemberId)
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.FirstName, "First Name", htmlAttributes: new { @class = "form-label fw-bold" })
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter first name" } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.LastName, "Last Name", htmlAttributes: new { @class = "form-label fw-bold" })
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter last name" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.JoinDate, "Join Date", htmlAttributes: new { @class = "form-label fw-bold" })
+                    @Html.EditorFor(model => model.JoinDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                    @Html.ValidationMessageFor(model => model.JoinDate, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-4">
+                    @Html.LabelFor(model => model.PlanId, "Membership Plan", htmlAttributes: new { @class = "form-label fw-bold" })
+                    @Html.DropDownListFor(model => model.PlanId, (SelectList)ViewBag.Plans, "Select a plan", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.PlanId, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="d-flex justify-content-center gap-3">
+                    <button type="submit" class="btn btn-primary px-4">Save Changes</button>
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary px-4" })
+                </div>
+            }
+        </div>
+    </div>
+</div>
